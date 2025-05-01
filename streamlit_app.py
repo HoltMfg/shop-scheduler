@@ -13,8 +13,7 @@ with st.form("upload"):
     submitted = st.form_submit_button("Upload Project")
 
 if submitted and project_name and ops_file and stalls_file and params_file:
-    st.success(f"'{project_name}' uploaded. Scheduling logic would execute here.")
-    # Logic placeholders
+    st.success(f"'{project_name}' uploaded. Preview and file export enabled.")
     try:
         ops_df = pd.read_excel(ops_file)
         stalls_df = pd.read_excel(stalls_file)
@@ -23,6 +22,21 @@ if submitted and project_name and ops_file and stalls_file and params_file:
         st.write("### Operations Preview", ops_df.head())
         st.write("### Stalls Preview", stalls_df.head())
         st.write("### Parameters", params_df.set_index("Param").T)
+
+        # Enable export to Excel
+        output_filename = f"{project_name}_Schedule_Output.xlsx"
+        with pd.ExcelWriter(output_filename) as writer:
+            ops_df.to_excel(writer, sheet_name="Operations", index=False)
+            stalls_df.to_excel(writer, sheet_name="Stalls", index=False)
+            params_df.to_excel(writer, sheet_name="Parameters", index=False)
+
+        with open(output_filename, "rb") as f:
+            st.download_button(
+                label="Download Combined Excel File",
+                data=f,
+                file_name=output_filename,
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
     except Exception as e:
         st.error(f"Failed to process inputs: {e}")
 
@@ -32,6 +46,6 @@ st.sidebar.number_input("Shifts per Day", min_value=1, max_value=3, value=1)
 st.sidebar.number_input("Shift Length (hours)", min_value=4, max_value=12, value=8)
 st.sidebar.number_input("WELD Overtime (hours)", min_value=0, max_value=4, value=0)
 
-# Stubbed action
+# Stubbed schedule generation
 if st.button("Generate Merged Schedule"):
-    st.info("Scheduling logic would run here and generate downloadable files.")
+    st.info("Scheduling logic would run here and create merged output.")
