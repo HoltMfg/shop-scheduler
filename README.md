@@ -1,4 +1,1 @@
-Fuel Tank Scheduler
-
-Deploy with Streamlit Cloud or run locally using:
-  streamlit run streamlit_app.py
+This is a logic-enabled demo version of the Fuel Tank Scheduler app.
