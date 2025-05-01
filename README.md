@@ -1,1 +1,5 @@
-This is a logic-enabled demo version of the Fuel Tank Scheduler app.
+Full-feature Fuel Tank Scheduler
+
+- Upload operations, stalls, and parameters
+- View Gantt-style schedule and staffing matrix
+- Download Excel output
