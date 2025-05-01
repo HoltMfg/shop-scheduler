@@ -1,4 +1,4 @@
-# Fuel Tank Shop Scheduler
+Fuel Tank Scheduler
 
-Upload Excel input files for each project. Adjust global capacity rules.
-Generates merged production schedule and staffing matrix.
+Deploy with Streamlit Cloud or run locally using:
+  streamlit run streamlit_app.py
